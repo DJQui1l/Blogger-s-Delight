@@ -1,9 +1,9 @@
 class User < ActiveRecord::Base
-  validates :firstname, :lastname, :email,
-  :birthday, :password, presence: true
+  validates :first_name, :last_name, :email, :birthday, :password, presence: true
+
   validates :email, uniqueness: true
 end
 
-class Posts < ActiveRecord::Base
-
+class Post < ActiveRecord::Base
+  belongs_to :users
 end
