@@ -34,5 +34,10 @@ end
 
 post '/login' do
   pp params
-  user = User.find_by(:user['email'])
+  user = User.find_by(email: params[:user])
+
+  given_pasword =  params[:password]
+  if user.password. == given_password
+    session[:user_id]user.id
+    redirect '/profile'
 end
