@@ -55,7 +55,6 @@ end
 get "/profile/:id" do
   @user = User.find_by(id: params['id'])
   pp @user
-  pp @user[:email]
 
   redirect '/' unless
   session[:user_id]
@@ -69,6 +68,11 @@ end
 
 
 get '/feed' do
-  # get user ID from session 
+  # get user ID from session
+  erb :feed
+end
+
+post '/feed' do
+  @post = Post.new(params[':post'], created_at: Time.now )
 
 end
