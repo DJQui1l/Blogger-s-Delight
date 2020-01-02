@@ -14,30 +14,61 @@ post '/' do #CREATE new user to go be INSERTed to database
   @user = User.new(params[:user])
 
   session[:user_id] = @user.id
-  p session[:user_id]
+  puts session[:user_id]
+
   @user.save
   redirect "/profile"
 
 end
-
-get "/profile" do
-
-  # redirect '/' unless
-  # session[:user_id]
-  erb :profile
-
-end
+#=======================================
 get '/login' do
 
   erb :login
 end
 
 post '/login' do
-  pp params
-  user = User.find_by(email: params[:user])
 
-  given_pasword =  params[:password]
-  if user.password. == given_password
-    session[:user_id]user.id
-    redirect '/profile'
+  @user = User.find_by(email: params[:user]['email'])
+
+  given_password = params[:user]['password']
+
+  if @user.password == given_password
+    session[:user_id] = @user.id
+
+    redirect "/profile/#{@user.id}"
+  end
+end
+
+get '/logout' do
+  session.clear
+  redirect '/'
+end
+
+#=======================================
+get "/profile" do
+
+  redirect "/profile/#{@user.id}"
+
+end
+
+
+get "/profile/:id" do
+  @user = User.find_by(id: params['id'])
+  pp @user
+  pp @user[:email]
+
+  redirect '/' unless
+  session[:user_id]
+
+  erb :nav, :layout => :profile
+
+  rescue ActiveRecord::RecordNotFound
+    puts 'ERROR 404'
+    erb :start
+end
+
+
+get '/feed' do
+  # get user ID from session 
+
 end
