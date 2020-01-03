@@ -73,6 +73,9 @@ get '/feed' do
 end
 
 post '/feed' do
-  @post = Post.new(params[':post'], created_at: Time.now )
-
+  @post = Post.new(params['feed'])
+  if @post.valid?
+    @post.user_id = session['user_id']
+    @post.save
+  end
 end
