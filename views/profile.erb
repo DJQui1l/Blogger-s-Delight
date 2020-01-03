@@ -1,3 +1,56 @@
-<%= yield %>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title></title>
 
- <h1>This is <%= @user[:email] %> profile</h1>
+  </head>
+  <body>
+
+    <%= yield %>
+    <h1>This is <%= @user[:email] %> profile</h1>
+    <button id = "deleteBtn" type="button" name="deleteBtn" onclick = "deleteAccount()">Delete Account</button>
+
+  <script>
+    clicked = false
+    function deleteAccount(){
+
+      if (clicked == true){
+        console.log("box is already open")
+      }
+      else {
+      console.log("button has been clicked")
+      clicked = true
+      delBox = document.createElement("div")
+      delBox.setAttribute("id","delBox")
+      document.body.appendChild(delBox)
+      
+        delBox_Content = document.createElement("div")
+        delBox_Content.setAttribute("id","delBox-Content")
+        delBox_Content.innerHTML = "Are you sure you want to delete your account?"
+        delBox.appendChild(delBox_Content)
+
+          delBox_Span = document.createElement("span")
+          delBox_Span.setAttribute("class","close")
+          delBox_Span.innerHTML = "&times"
+          delBox_Content.appendChild(delBox_Span)
+
+
+      delBoxStyle = delBox.style
+      delBoxStyle.display = "none"
+      delBoxStyle.position = "fixed"
+      delBoxStyle.zIndex = "1"
+
+      delBox_ContentStyle = delBox_Content.style
+      delBox_ContentStyle.backgroundColor = "#fefefe"
+      delBox_ContentStyle.margin = "15% auto"
+      delBox_ContentStyle.padding = "20px"
+      delBox_ContentStyle.border = "1px solid #888"
+      }
+    }
+
+
+
+    </script>
+</body>
+</html>

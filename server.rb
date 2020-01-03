@@ -64,18 +64,31 @@ get "/profile/:id" do
   rescue ActiveRecord::RecordNotFound
     puts 'ERROR 404'
     erb :start
+
+
+
 end
 
 
 get '/feed' do
   # get user ID from session
-  erb :feed
+  if session['user_id']
+    erb :feed
+  else
+    'Not logged in'
+      redirect '/'
+  end
 end
 
 post '/feed' do
-  @post = Post.new(params['feed'])
-  if @post.valid?
-    @post.user_id = session['user_id']
-    @post.save
+
+  if session['user_id'] #if someone is logged in, enable posting
+    @post = Post.new(content: params['content'])
+    if @post.valid?
+      @post.user_id = session['user_id']
+      @post.save
+
+    end
+
   end
 end
