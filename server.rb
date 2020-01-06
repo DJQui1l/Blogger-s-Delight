@@ -17,7 +17,7 @@ post '/' do #CREATE new user to go be INSERTed to database
   puts session[:user_id]
 
   @user.save
-  redirect "/profile"
+  redirect "/profile/#{@user.id}"
 
 end
 #=======================================
@@ -45,11 +45,11 @@ get '/logout' do
 end
 
 #=======================================
-get "/profile" do
-
-  redirect "/profile/#{@user.id}"
-
-end
+# get "/profile" do
+#
+#   redirect "/profile/#{@user.id}"
+#
+# end
 
 
 get "/profile/:id" do

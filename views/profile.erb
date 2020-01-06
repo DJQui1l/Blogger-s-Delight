@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title></title>
-
+  <link rel="stylesheet" href="./main.css">
   </head>
   <body>
 
@@ -13,40 +13,68 @@
 
   <script>
     clicked = false
+
     function deleteAccount(){
 
       if (clicked == true){
         console.log("box is already open")
       }
+
       else {
       console.log("button has been clicked")
       clicked = true
+
       delBox = document.createElement("div")
       delBox.setAttribute("id","delBox")
-      document.body.appendChild(delBox)
-      
+
         delBox_Content = document.createElement("div")
         delBox_Content.setAttribute("id","delBox-Content")
         delBox_Content.innerHTML = "Are you sure you want to delete your account?"
-        delBox.appendChild(delBox_Content)
 
-          delBox_Span = document.createElement("span")
+          delBox_Span = document.createElement("div")
           delBox_Span.setAttribute("class","close")
           delBox_Span.innerHTML = "&times"
-          delBox_Content.appendChild(delBox_Span)
+
+      delBox_Yes = document.createElement("button")
+      delBox_Yes.setAttribute("id", "delBox_Yes")
+      delBox_Yes.innerText = "Yes"
+      delBox_No = document.createElement("button")
+      delBox_No.setAttribute("id", "delBox_No")
+      delBox_No.innerText = "No"
 
 
-      delBoxStyle = delBox.style
-      delBoxStyle.display = "none"
-      delBoxStyle.position = "fixed"
-      delBoxStyle.zIndex = "1"
+      document.body.appendChild(delBox)
+      delBox.appendChild(delBox_Span)
+      delBox.appendChild(delBox_Content)
+      delBox.appendChild(delBox_Yes)
+      delBox.appendChild(delBox_No)
 
-      delBox_ContentStyle = delBox_Content.style
-      delBox_ContentStyle.backgroundColor = "#fefefe"
-      delBox_ContentStyle.margin = "15% auto"
-      delBox_ContentStyle.padding = "20px"
-      delBox_ContentStyle.border = "1px solid #888"
-      }
+
+      // delBoxStyle = delBox.style
+      // // delBoxStyle.display = "none"
+      // delBoxStyle.position = "fixed"
+      // delBoxStyle.border = "1px solid #000"
+      // delBoxStyle.zIndex = "1"
+      //
+      // delBoxStyle.padding = "5%"
+
+
+
+      // delBox_ContentStyle = delBox_Content.style
+      // delBox_ContentStyle.backgroundColor = "#fefefe"
+
+
+      delBox_Yes.addEventListener('click', function(){
+
+        delBox.remove()
+        clicked = false
+      })
+      delBox_No.addEventListener('click', function(){
+        delBox.remove()
+        clicked = false
+      })
+
+
     }
 
 

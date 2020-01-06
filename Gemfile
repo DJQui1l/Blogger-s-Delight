@@ -3,5 +3,14 @@ source "https://rubygems.org" do
   gem "sqlite3"
   gem "rake"
   gem "sinatra"
+  gem "pg"
 
+end
+
+group :development do
+ gem 'sqlite3'
+end
+
+group :production do
+ gem 'pg'
 end
