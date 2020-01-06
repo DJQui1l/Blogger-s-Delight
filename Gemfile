@@ -3,7 +3,7 @@ source "https://rubygems.org" do
   gem "sqlite3"
   gem "rake"
   gem "sinatra"
-  gem "pg"
+  
 
 end
 
