@@ -1,1 +1,16 @@
- <h1>This is your profile</h1> 
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+
+  </head>
+  <body>
+
+    <%= yield %>
+    <h1>This is <%= @user[:email] %> profile</h1>
+    <button id = "deleteBtn" type="button" name="deleteBtn" onclick = "deleteAccount()">Delete Account</button>
+
+  
+</body>
+</html>
