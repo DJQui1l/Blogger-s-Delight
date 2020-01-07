@@ -11,6 +11,8 @@ set :database, {adapter: 'postgresql',
 }
 
 enable :sessions
+# use Rack::Session::Pool
+
 
 get '/' do #signup here
   erb :start
@@ -20,13 +22,12 @@ post '/' do #CREATE new user to go be INSERTed to database
   @user = User.new(params[:user])
 
   session[:user_id] = @user.id
-  puts session[:user_id]
-
+  pp session[:user_id]
   @user.save
   redirect "/profile/#{@user.id}"
 
 end
-#=======================================
+# #=======================================
 get '/login' do
 
   erb :login
@@ -50,51 +51,68 @@ get '/logout' do
   redirect '/'
 end
 
-#=======================================
+# #=======================================
 get "/profile" do
 
-  redirect "/profile/#{@user.id}"
+  if session[:user_id] != nil
 
+    redirect "/profile/#{@user.id}"
+  else
+    redirect '/'
+  end
 end
 
 
 get "/profile/:id" do
-  @user = User.find_by(id: params['id'])
+  if session[:user_id]
+  @user = User.find_by(id: session[:user_id])
   pp @user
 
   redirect '/' unless
   session[:user_id]
 
   erb :nav, :layout => :profile
+  end
 
   rescue ActiveRecord::RecordNotFound
     puts 'ERROR 404'
     erb :start
-
-
-
 end
 
 
-# get '/feed' do
-#   # get user ID from session
-#   if session['user_id']
-#     erb :feed
-#   else
-#     'Not logged in'
-#       redirect '/'
-#   end
-# end
+
 #
-# post '/feed' do
-#
-#   if session['user_id'] #if someone is logged in, enable posting
-#     @post = Post.new(content: params['content'])
-#     if @post.valid?
-#       @post.user_id = session['user_id']
-#       @post.save
-#
-#     end
-#
-#   end
-# end
+# #=======================================
+
+get '/feed' do
+  # get user ID from session
+  if session['user_id']
+
+    erb :nav, :layout => :feed
+
+  else
+    'Not logged in'
+      redirect '/'
+  end
+end
+
+post '/feed' do
+
+  if session['user_id'] #if someone is logged in, enable posting
+
+    @post = Post.new(content: params['content'], user_id: session[:user_id])
+    if @post.valid?
+      @post.save
+
+      redirect '/feed'
+    end
+
+  end
+end
+
+
+get '/delete' do
+
+  # erb :delete
+
+end

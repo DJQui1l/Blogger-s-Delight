@@ -9,7 +9,7 @@
 
     <%= yield %>
     <h1>This is <%= @user[:email] %> profile</h1>
-    <button id = "deleteBtn" type="button" name="deleteBtn" onclick = "deleteAccount()">Delete Account</button>
+    <a href="/delete"></a><button id = "deleteBtn" type="button" name="deleteBtn" onclick = "/delete">Delete Account</button></a>
 
   <script>
     clicked = false
@@ -35,46 +35,48 @@
           delBox_Span.setAttribute("class","close")
           delBox_Span.innerHTML = "&times"
 
-      delBox_Yes = document.createElement("button")
-      delBox_Yes.setAttribute("id", "delBox_Yes")
-      delBox_Yes.innerText = "Yes"
+      delBox_Yes = document.createElement("input")
+      delBox_Yes.setAttribute("type", "submit")
+      delBox_Yes.setAttribute("name","contentSubmit")
+      delBox_Yes.value = "Yes"
       delBox_No = document.createElement("button")
       delBox_No.setAttribute("id", "delBox_No")
       delBox_No.innerText = "No"
 
 
       document.body.appendChild(delBox)
-      delBox.appendChild(delBox_Span)
-      delBox.appendChild(delBox_Content)
-      delBox.appendChild(delBox_Yes)
-      delBox.appendChild(delBox_No)
+      delBox.appendChild(delBox_Span) // 'x' close button
+      delBox.appendChild(delBox_Content) // 'are you sure?'
+      delBox.appendChild(delBox_Yes) // 'Yes' Button
+      delBox.appendChild(delBox_No) // 'No' Button
 
 
-      // delBoxStyle = delBox.style
-      // // delBoxStyle.display = "none"
-      // delBoxStyle.position = "fixed"
-      // delBoxStyle.border = "1px solid #000"
-      // delBoxStyle.zIndex = "1"
-      //
-      // delBoxStyle.padding = "5%"
+      delBoxStyle = delBox.style
+      // delBoxStyle.display = "none"
+      delBoxStyle.position = "fixed"
+      delBoxStyle.border = "1px solid #000"
+      delBoxStyle.zIndex = "1"
+
+      delBoxStyle.padding = "5%"
 
 
 
-      // delBox_ContentStyle = delBox_Content.style
-      // delBox_ContentStyle.backgroundColor = "#fefefe"
+      delBox_ContentStyle = delBox_Content.style
+      delBox_ContentStyle.backgroundColor = "#fefefe"
 
 
       delBox_Yes.addEventListener('click', function(){
 
+
         delBox.remove()
         clicked = false
-      })
+        })
       delBox_No.addEventListener('click', function(){
         delBox.remove()
         clicked = false
-      })
+        })
 
-
+      }
     }
 
 
