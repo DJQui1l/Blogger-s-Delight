@@ -6,21 +6,28 @@
     <link rel="stylesheet" href="start.css">
   </head>
   <body>
-    <div id="start">
+
       <nav>
-        <!-- <a href = "/"><li>Sign Up</li></a> -->
-        <a href="/login"><li>Login</li></a>
+
+         <a href="/login"><li>Login</li></a>
+
+          
+
       </nav>
-      <h1>Sign Up</h1>
-      <form id =""  action="/" method="post">
-        <input required type="text"     name = "user[first_name]" placeholder="First Name"><br>
-        <input required type="text"     name = "user[last_name]"  placeholder="Last Name"><br>
-        <input required type="email"    name = "user[email]"      placeholder="Email"><br>
-        <input required type="text"     name = "user[birthday]"   placeholder="birthday (mm/dd/yyyy)"><br>
-        <input required type="password" name = "user[password]"   placeholder="Password"><br>
-        <input required type="submit"   value="Submit">
+<div id = "startbox">
+
+
+      <form id ="signup-form"  action="/" method="post">
+        <h1>Sign Up</h1>
+        <input class = "signup-input" required type="text"     name = "user[first_name]" placeholder="First Name"><br>
+        <input class = "signup-input" required type="text"     name = "user[last_name]"  placeholder="Last Name"><br>
+        <input class = "signup-input" required type="email"    name = "user[email]"      placeholder="Email"><br>
+        <input class = "signup-input" required type="text"     name = "user[birthday]"   placeholder="birthday (mm/dd/yyyy)"><br>
+        <input class = "signup-input" required type="password" name = "user[password]"   placeholder="Password"><br>
+        <input class = "signup-submit" required type="submit"   value="Submit">
       </form>
-  </div>
+
+</div>
     <script src = "main.js"></script>
   </body>
 </html>

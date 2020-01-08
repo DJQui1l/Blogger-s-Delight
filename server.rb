@@ -15,15 +15,18 @@ enable :sessions
 
 
 get '/' do #signup here
-  erb :start
+
+    erb :start
+
+
 end
 
 post '/' do #CREATE new user to go be INSERTed to database
   @user = User.new(params[:user])
 
+  @user.save
   session[:user_id] = @user.id
   pp session[:user_id]
-  @user.save
   redirect "/profile/#{@user.id}"
 
 end
@@ -66,15 +69,17 @@ end
 
 
 get "/profile/:id" do
-  if session[:user_id]
+
   @user = User.find_by(id: session[:user_id])
   # pp @user
 
-  redirect '/' unless
-  session[:user_id]
+  # redirect '/' unless
+  # session[:user_id]
 
   erb :nav, :layout => :profile
-  end
+
+
+
 
   rescue ActiveRecord::RecordNotFound
     puts 'ERROR 404'

@@ -7,7 +7,8 @@
   </head>
   <body>
 
-    <% yield %>
+    <%= yield %>
+
     <form id ="newPost" action="/feed" method="post">
       <textarea id = "contentArea" name="content" rows="8" cols="80" placeholder="What's on your noggin'?"></textarea>
       <!-- <input id = "contentArea" type="text" name='content' placeholder = "What's on your noggin'?" onkeyup="enable(this)"> -->
@@ -17,12 +18,14 @@
     <div id = "count"></div>
 
 
+
+<!--
 <style media="screen">
   #contentArea {
-    padding:5%;
+    padding:2%;
 
   }
-</style>
+</style> -->
 
 
 
