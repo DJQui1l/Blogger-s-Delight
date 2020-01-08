@@ -3,21 +3,38 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <link rel="stylesheet" href="main.css">
   </head>
   <body>
 
+    <% yield %>
     <form id ="newPost" action="/feed" method="post">
-      <input id = "contentArea" type="text" name='content' placeholder = "What's on your noggin'?">
-      <input type="submit" name="contentSubmit" value="Post">
+      <textarea id = "contentArea" name="content" rows="8" cols="80" placeholder="What's on your noggin'?"></textarea>
+      <!-- <input id = "contentArea" type="text" name='content' placeholder = "What's on your noggin'?" onkeyup="enable(this)"> -->
+      <input id = "contentSubmit" type="submit" name="contentSubmit" value="Post" >
     </form>
 
     <div id = "count"></div>
 
-    
+
+<style media="screen">
+  #contentArea {
+    padding:5%;
+
+  }
+</style>
 
 
 
-
-    <script src="main.js" charset="utf-8"></script>
+    <script>
+      function enable(contentArea){
+        var contentSubmit = document.getElementById('contentSubmit');
+         if (contentArea.value != '') {
+             contentSubmit.disabled = false;
+         }
+         else {
+             contentSubmit.disabled = true;
+         }
+    </script>
   </body>
 </html>

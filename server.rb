@@ -57,7 +57,7 @@ end
 get "/profile" do
 
   if session[:user_id] != nil
-
+    @user = User.find_by(id: session[:user_id])
     redirect "/profile/#{@user.id}"
   else
     redirect '/'
@@ -68,7 +68,7 @@ end
 get "/profile/:id" do
   if session[:user_id]
   @user = User.find_by(id: session[:user_id])
-  pp @user
+  # pp @user
 
   redirect '/' unless
   session[:user_id]
