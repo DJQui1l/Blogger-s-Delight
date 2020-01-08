@@ -1,14 +1,29 @@
 body {
   font-family: 'Varela Round', sans-serif;
 }
+nav a li {
+  float: right;
+padding: 1% 1.5%;
+margin: -1% 2%;
+list-style: none;
+font-weight: bold;
+font-size: 1.2em;
+background-color: #9e9e9e;
+color: #eee;
+border-radius: 8px;
+transition: 0.2s;
+}
 
+nav a li:hover{
+  background-color: #119B13;
+}
 #signup-form {
   margin: 2% auto;
   text-align: center;
   width: 24%;
   /* background-color: #9f9f9f; */
   padding: 2%;
-  border-radius: 5px;
+  border-radius: 7px;
   box-shadow: 3px 4px 8px #9e9e9e;
 }
 
@@ -22,6 +37,13 @@ body {
       border: solid 1px #9e9e9e;
       text-align: center;
       outline: none;
+      transition: 0.2s;
+    }
+    .signup-input:focus{
+      box-shadow: 0 0 1pt 0.2pt #1e1e1e
+      /* outline-color: #01B2FE; */
+      /* font-size: 1em; */
+
     }
 
 
@@ -31,4 +53,7 @@ body {
       border: none;
       border-radius: 40px;
       color: #eee;
+    }
+    .signup-submit:hover {
+      background-color: #156B13;
     }

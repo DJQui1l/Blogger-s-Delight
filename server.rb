@@ -16,10 +16,13 @@ enable :sessions
 
 get '/' do #signup here
 
+
+
+
     erb :start
 
-
 end
+
 
 post '/' do #CREATE new user to go be INSERTed to database
   @user = User.new(params[:user])
@@ -94,7 +97,8 @@ end
 get '/feed' do
   # get user ID from session
   if session['user_id']
-
+    @posts = Post.all
+    @user = User.find_by(id: @posts.user_id)
     erb :nav, :layout => :feed
 
   else
@@ -124,27 +128,3 @@ get '/delete' do
   # erb :delete
 
 end
-#
-#
-# get '/feed' do
-#   # get user ID from session
-#   if session['user_id']
-#     erb :feed
-#   else
-#     'Not logged in'
-#       redirect '/'
-#   end
-# end
-#
-# post '/feed' do
-#
-#   if session['user_id'] #if someone is logged in, enable posting
-#     @post = Post.new(content: params['content'])
-#     if @post.valid?
-#       @post.user_id = session['user_id']
-#       @post.save
-#
-#     end
-#
-#   end
-# end

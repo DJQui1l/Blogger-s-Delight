@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   validates :first_name, :last_name, :email, :birthday, :password, presence: true
 
   validates :email, uniqueness: true
+
+  # has_many: :posts, dependent: :destroy
 end
 
 class Post < ActiveRecord::Base
