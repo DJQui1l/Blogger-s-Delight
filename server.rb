@@ -33,12 +33,13 @@ post '/' do #CREATE new user to go be INSERTed to database
   redirect "/profile/#{@user.id}"
 
 end
-# #=======================================
+
+
 get '/login' do
 
   erb :login
 end
-# #=======================================
+
 
 
 post '/login' do
@@ -49,8 +50,10 @@ post '/login' do
 
   if @user.password == @given_password
     session[:user_id] = @user.id
-
     redirect "/profile/#{@user.id}"
+  else
+    redirect '/login'
+
   end
 end
 
@@ -98,7 +101,9 @@ get '/feed' do
   # get user ID from session
   if session['user_id']
     @posts = Post.all
-    @user = User.find_by(id: @posts.user_id)
+    @users = User.find_by(id: @posts.user_id)
+
+    pp@users
     erb :nav, :layout => :feed
 
   else
