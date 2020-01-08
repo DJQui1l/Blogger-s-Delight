@@ -5,4 +5,4 @@ contentArea.onkeyup = function () {
 };
 
 // -------------- DELETE BOX in profile.erb ------------------
-deleteBtn = getElementById('deleteBtn');
+// deleteBtn = getElementById('deleteBtn');
