@@ -14,12 +14,15 @@
     <h3><%= @user.email %></h3>
     <h3><%= @user.birthday %></h3>
 
-<!-- ======================= -->
+    <% if session['user_id'] == @user.id %>
     <form class="" action="/profile/<%= @user.id %>" method="post">
       <input type="hidden" name="_method" value="delete"/>
 
       <input id = "deleteBtn" type="submit" name="deleteBtn" value = "Delete Account"/>
     </form>
+    <% else %>
+    <form></form>
+    <% end %>
 
 
 
@@ -34,6 +37,9 @@
     </div>
 
     <% end %>
+
+
+
 
 </body>
 </html>

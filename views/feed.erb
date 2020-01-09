@@ -15,7 +15,7 @@
       <input id = "contentSubmit" type="submit" name="contentSubmit" value="Post" >
     </form>
 
-    <% @posts[-20..-1].reverse.each do |p| %>
+    <% @posts.reverse.each do |p| %>
     <% @user = User.find_by(id: p.user_id) %>
     <div class="posts">
       <a href = "/profile/<%=@user.id%>"><h3><%=@user.first_name%> <%= @user.last_name%></h3></a>
