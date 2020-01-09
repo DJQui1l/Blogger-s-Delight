@@ -68,6 +68,7 @@ get "/profile" do
   if session[:user_id] != nil
     @user = User.find_by(id: session[:user_id])
     redirect "/profile/#{@user.id}"
+
   else
     redirect '/'
   end
@@ -75,10 +76,10 @@ end
 
 
 get "/profile/:id" do
-
+  if session[:user_id]
   @user = User.find_by(id: session[:user_id])
-  # @posts = Post.find_by(id: session[:user_id])
   erb :nav, :layout => :profile
+  end
 
   rescue ActiveRecord::RecordNotFound
     puts 'ERROR 404'

@@ -15,6 +15,18 @@
     <h3><%= @user.birthday %></h3>
     <button id = "deleteBtn" type="button" name="deleteBtn" onclick = "/delete">Delete Account</button>
 
+    <% @posts = Post.all.where(user_id: @user.id)%>
+    <% @posts.reverse.each do |p| %>
+    <div class="posts">
+      <a href = "/profile/<%=@user.id%>"><h3><%=@user.first_name%> <%= @user.last_name%></h3></a>
+      <p><%=p.content %></p>
+      <p><%=p.created_at%></p>
+    </div>
+
+    <% end %>
+
+
+
   <script>
     clicked = false
 
