@@ -10,6 +10,9 @@ set :database, {adapter: 'postgresql',
                 password: ENV['POSTGRES_PW']
 }
 
+configure :production do
+  set :database, {url: ENV['DATABASE_URL']}
+end
 enable :sessions
 # use Rack::Session::Pool
 
@@ -76,10 +79,17 @@ end
 
 
 get "/profile/:id" do
-  if session[:user_id]
+  if session[:user_id] #if logged in, find that user's profile
+    if params[:id] == session[:user_id]
   @user = User.find_by(id: session[:user_id])
-  erb :nav, :layout => :profile
+
+else #else load other user's profile and feed
+    @user = User.find_by(id: params[:id])
+    end
+  else
+    redirect '/'
   end
+  erb :nav, :layout => :profile
 
   rescue ActiveRecord::RecordNotFound
     puts 'ERROR 404'
@@ -96,8 +106,6 @@ get '/feed' do
   if session['user_id']
     @posts = Post.all
     # @users = User.find_by(id: @posts.user_id)
-
-    pp@users
     erb :nav, :layout => :feed
 
   else
@@ -122,8 +130,15 @@ post '/feed' do
 end
 
 
-get '/delete' do
-
-  # erb :delete
+delete '/profile/:id' do
+    User.destroy(params[:id])
+    # redirect '/profile/delete-confirmed'
+    # session.clear
+    #use a two step process
 
 end
+
+# get '/profile/delete-confirmed' do
+#   redirect '/' unless session['user_id'] != nil
+#   erb :delete_confirmed
+# end

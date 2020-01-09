@@ -1,0 +1,15 @@
+<h3>Are you sure you want to Delete your account?</h3>
+
+<form id = "deleteBox" action="/profile/<%= @user.id %>" method="post">
+  <input type="hidden" name="_method" value="delete"/>
+
+  <button id = "deleteBox-Yes" type="submit" name="deleteBox-Yes" value = "yes">Yes</button>
+  <button id = "deleteBox-No" type="submit" name="deleteBox-No" value = "no">No</button>
+</form>
+
+<!-- <script type="text/javascript">
+
+cB_Yes = document.getElementById('choiceBox-Yes');
+cB_Yes.addEventListener('')
+
+</script> -->

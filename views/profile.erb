@@ -13,8 +13,18 @@
     <h1>This is <%= @user.first_name %><% if @user.first_name[-1] =='s'%>'<%else%>'s<%end%> profile</h1>
     <h3><%= @user.email %></h3>
     <h3><%= @user.birthday %></h3>
-    <button id = "deleteBtn" type="button" name="deleteBtn" onclick = "/delete">Delete Account</button>
 
+<!-- ======================= -->
+    <form class="" action="/profile/<%= @user.id %>" method="post">
+      <input type="hidden" name="_method" value="delete"/>
+
+      <input id = "deleteBtn" type="submit" name="deleteBtn" value = "Delete Account"/>
+    </form>
+
+
+
+
+<!-- ============================================== -->
     <% @posts = Post.all.where(user_id: @user.id)%>
     <% @posts.reverse.each do |p| %>
     <div class="posts">
@@ -25,79 +35,5 @@
 
     <% end %>
 
-
-
-  <script>
-    clicked = false
-
-    function deleteAccount(){
-
-      if (clicked == true){
-        console.log("box is already open")
-      }
-
-      else {
-      console.log("button has been clicked")
-      clicked = true
-
-      delBox = document.createElement("div")
-      delBox.setAttribute("id","delBox")
-
-        delBox_Content = document.createElement("div")
-        delBox_Content.setAttribute("id","delBox-Content")
-        delBox_Content.innerHTML = "Are you sure you want to delete your account?"
-
-          delBox_Span = document.createElement("div")
-          delBox_Span.setAttribute("class","close")
-          delBox_Span.innerHTML = "&times"
-
-      delBox_Yes = document.createElement("input")
-      delBox_Yes.setAttribute("type", "submit")
-      delBox_Yes.setAttribute("name","contentSubmit")
-      delBox_Yes.value = "Yes"
-      delBox_No = document.createElement("button")
-      delBox_No.setAttribute("id", "delBox_No")
-      delBox_No.innerText = "No"
-
-
-      document.body.appendChild(delBox)
-      delBox.appendChild(delBox_Span) // 'x' close button
-      delBox.appendChild(delBox_Content) // 'are you sure?'
-      delBox.appendChild(delBox_Yes) // 'Yes' Button
-      delBox.appendChild(delBox_No) // 'No' Button
-
-
-      delBoxStyle = delBox.style
-      // delBoxStyle.display = "none"
-      delBoxStyle.position = "fixed"
-      delBoxStyle.border = "1px solid #000"
-      delBoxStyle.zIndex = "1"
-
-      delBoxStyle.padding = "5%"
-
-
-
-      delBox_ContentStyle = delBox_Content.style
-      delBox_ContentStyle.backgroundColor = "#fefefe"
-
-
-      delBox_Yes.addEventListener('click', function(){
-
-
-        delBox.remove()
-        clicked = false
-        })
-      delBox_No.addEventListener('click', function(){
-        delBox.remove()
-        clicked = false
-        })
-
-      }
-    }
-
-
-
-
-    </script>
 </body>
 </html>

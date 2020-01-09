@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
 
   validates :email, uniqueness: true
 
-  # has_many: :posts, dependent: :destroy
+  has_many :posts, dependent: :destroy
 end
 
 class Post < ActiveRecord::Base
