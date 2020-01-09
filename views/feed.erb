@@ -15,11 +15,12 @@
       <input id = "contentSubmit" type="submit" name="contentSubmit" value="Post" >
     </form>
 
-    <% @posts.each do |p| %>
+    <% @posts.reverse.each do |p| %>
+<% @user = User.find_by(id: p.user_id) %>
     <div class="posts">
-      <h3><%@user.first_name%></h3>
+      <a href = "/profile/<%=@user.id%>"><h3><%=@user.first_name%> <%= @user.last_name%></h3></a>
       <p><%=p.content %></p>
-      <p><%=p.created_at %></p>
+      <p><%=p.created_at%></p>
     </div>
     <% end %>
 

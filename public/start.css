@@ -1,11 +1,13 @@
 body {
+  margin: 0 auto;
   font-family: 'Varela Round', sans-serif;
 }
-nav a li {
+#loginBtn {
   float: right;
 padding: 1% 1.5%;
 margin: -1% 2%;
 list-style: none;
+text-decoration: none;
 font-weight: bold;
 font-size: 1.2em;
 background-color: #9e9e9e;
@@ -14,9 +16,9 @@ border-radius: 8px;
 transition: 0.2s;
 }
 
-nav a li:hover{
+#loginBtn:hover{
   background-color: #119B13;
-}
+  }
 #signup-form {
   margin: 2% auto;
   text-align: center;
@@ -39,16 +41,16 @@ nav a li:hover{
       outline: none;
       transition: 0.2s;
     }
-    .signup-input:focus{
-      box-shadow: 0 0 1pt 0.2pt #1e1e1e
-      /* outline-color: #01B2FE; */
-      /* font-size: 1em; */
+      .signup-input:focus{
+        box-shadow: 0 0 1pt 0.2pt #1e1e1e
+        /* outline-color: #01B2FE; */
+        /* font-size: 1em; */
 
-    }
+      }
 
 
     .signup-submit {
-      width: 56%;
+      width: 50%;
       background-color: #119B13;
       border: none;
       border-radius: 40px;

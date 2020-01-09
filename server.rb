@@ -101,7 +101,7 @@ get '/feed' do
   # get user ID from session
   if session['user_id']
     @posts = Post.all
-    @users = User.find_by(id: @posts.user_id)
+    # @users = User.find_by(id: @posts.user_id)
 
     pp@users
     erb :nav, :layout => :feed

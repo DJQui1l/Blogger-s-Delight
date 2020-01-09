@@ -7,12 +7,7 @@
   <a href="/"><li>Sign Up</li></a>
 </nav>
 <h1>Log In</h1>
-<% if session != @user. %>
-<% @user = User.find_by(id: session['user.id'])  %>
-<% if @user.password != @given_password%>
-<p>Password is incorrect</p>
-<% end %>
-<% end %>
+
 <form class="" action="/login" method="post">
   <input type="email"    name="user[email]"    placeholder = "Email"><br>
   <input type="password" name="user[password]" placeholder = "Password"><br>

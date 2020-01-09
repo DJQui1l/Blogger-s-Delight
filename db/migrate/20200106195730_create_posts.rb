@@ -7,3 +7,4 @@ class CreatePosts < ActiveRecord::Migration[6.0]
     end
   end
 end
+# config.active_record.default_timezone = :local
