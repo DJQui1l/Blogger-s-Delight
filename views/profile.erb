@@ -10,7 +10,9 @@
 <!-- nav bar -->
     <%= yield %>
 
-    <h1>This is <%= @user[:email] %> profile</h1>
+    <h1>This is <%= @user.first_name %><% if @user.first_name[-1] =='s'%>'<%else%>'s<%end%> profile</h1>
+    <h3><%= @user.email %></h3>
+    <h3><%= @user.birthday %></h3>
     <button id = "deleteBtn" type="button" name="deleteBtn" onclick = "/delete">Delete Account</button>
 
   <script>
