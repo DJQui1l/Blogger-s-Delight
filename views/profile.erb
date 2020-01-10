@@ -17,9 +17,8 @@
 
 
 <!-- ============================================== -->
-<% @posts = Post.all.where(user_id: @user.id)%>
-    <h3> Posts: <%=@posts.count%></h3>
-    <% @posts.limit(20).reverse.each do |p| %>
+    <h3> Posts: <%=@user.posts.count%></h3>
+    <% @user.posts.order(created_at: :desc).limit(20).each do |p| %>
     <div class="posts">
       <a href = "/profile/<%=@user.id%>"><h3><%=@user.first_name%> <%= @user.last_name%></h3></a>
       <p><%=p.content %></p>
