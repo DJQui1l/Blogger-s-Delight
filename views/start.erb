@@ -9,11 +9,27 @@
 
 
 
-         <a id = 'loginBtn' href="/login"><li>Login</li></a>
+         <a id = 'loginBtn' href="/login"><li>Log in</li></a>
 
 <div id = "startbox">
 
+  <div id="startbox-left">
+    <div id="startbox-left-container">
+      <!-- <h2 id= "startbox-beforetitle">Welcome to </h2> -->
+      <h1 id ="startbox-left-sign"> " </h1>
+      <h1 id ="startbox-left-title">Quotes </h1>
+      <h4 id="startbox-left-subtitle">We all have'em.</h4>
 
+      <div id = "startbox-left-qotd-container">
+
+        <!-- <h3 id="startbox-left-qotd">Qoute of the Day:</h3> -->
+        <p id = "startbox-left-qoute">"If you keep being afraid of what you're trying to accomplish, you'll never be successful" </p>
+          <i id= "startbox-left-qoute-person">-Darian "Quill" Jarvis</i>
+      </div>
+    </div>
+  </div>
+
+  <div id="startbox-right">
       <form id ="signup-form"  action="/" method="post">
         <h1>Sign Up</h1>
         <input autofocus = true class = "signup-input" required type="text"     name = "user[first_name]" placeholder="First Name"><br>
@@ -23,6 +39,7 @@
         <input class = "signup-input" required type="password" name = "user[password]"   placeholder="Password"><br>
         <input class = "signup-submit" required type="submit"   value="Submit">
       </form>
+    </div>
 
 </div>
     <script src = "main.js"></script>
