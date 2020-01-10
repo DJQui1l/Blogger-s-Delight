@@ -86,7 +86,7 @@ get "/profile/:id" do
 
     else #else load other user's profile and feed
       if @user = User.find_by(id: params[:id]) == nil
-        redirect '/'
+        redirect '/feed'
       else
         @user = User.find_by(id: params[:id])
 
