@@ -1,15 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
 <head>
+    <meta charset="utf-8">
+    <title></title>
   <link rel="stylesheet" href="login.css">
 </head>
 
 <nav>
   <!-- <a href = "/"><li>Sign Up</li></a> -->
-  <a href="/"><li>Sign Up</li></a>
-</nav>
-<h1>Log In</h1>
 
-<form class="" action="/login" method="post">
-  <input autofocus type="email"    name="user[email]"    placeholder = "Email"><br>
-  <input type="password" name="user[password]" placeholder = "Password"><br>
-  <input type="submit"   name="Submit" value = "Log in">
+</nav>
+
+<div id = "loginBox">
+<div class="loginbox-title-container">
+
+  <!-- <h1 id ="loginbox-left-sign"> " </h1> -->
+  <h1 id ="loginbox-left-title">"I logged in..."</h1>
+
+</div>
+
+
+<form id= "login-form" action="/login" method="post">
+  <h1>Log In</h1>
+  <input autofocus class = "login-input" type="email"    name="user[email]"    placeholder = "Email"><br>
+  <input class = "login-input" type="password" name="user[password]" placeholder = "Password"><br>
+  <input class = "login-submit" type="submit"   name="Submit" value = "Log In">
+  <a id = "signup-link" href="/"><li>Sign Up</li></a>
 </form>
+
+</div>
