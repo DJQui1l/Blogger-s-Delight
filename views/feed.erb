@@ -21,6 +21,7 @@
       <a href = "/profile/<%=@user.id%>"><h3><%=@user.first_name%> <%= @user.last_name%></h3></a>
       <p><%=p.content %></p>
       <p><%=p.created_at%></p>
+      <br>
 
     </div>
     <% end %>
@@ -37,7 +38,16 @@
   }
 </style> -->
 
+<style media="screen">
+  body {
+    text-align: center;
+  }
+  #newPost{
+    margin-bottom: 4%
 
+  }
+
+</style>
 
     <script>
       function enable(contentArea){

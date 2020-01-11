@@ -52,11 +52,17 @@ post '/login' do
 
   @given_password = params[:user]['password']
 
-  if @user.password == @given_password
+  if @user.password == @given_password && @user.active == true
     session[:user_id] = @user.id
+    session[:active] = @user.active
+    pp session[:user_id]
+    pp session[:active]
     redirect "/profile/#{@user.id}"
+
+  elsif @user.active == false
+    redirect '/deactivated'
   else
-    redirect '/login'
+    redirect '/'
 
   end
 end
@@ -69,7 +75,7 @@ end
 # #=======================================
 get "/profile" do
 
-  if session[:user_id] != nil
+  if session[:user_id] != nil && session[:active] == true
     @user = User.find_by(id: session[:user_id])
     redirect "/profile/#{@user.id}"
 
@@ -80,7 +86,7 @@ end
 
 
 get "/profile/:id" do
-  if session[:user_id] #if logged in, find that user's profile
+    if session['user_id'] && session[:active] == true #if logged in, find that user's profile
     if params[:id] == session[:user_id]
       @user = User.find_by(id: session[:user_id])
 
@@ -110,10 +116,12 @@ end
 
 get '/feed' do
   # get user ID from session
-  if session['user_id']
+    if session['user_id'] && session[:active] == true
     @posts = Post.all
     # @users = User.find_by(id: @posts.user_id)``
     erb :nav, :layout => :feed
+
+
 
   else
     'Not logged in'
@@ -124,7 +132,7 @@ end
 
 post '/feed' do
 
-  if session['user_id'] #if someone is logged in, enable posting
+  if session['user_id'] && session[:active] == true #if someone is logged in and is active, enable posting
 
     @post = Post.new(content: params['content'], user_id: session[:user_id])
     if @post.valid?
@@ -132,20 +140,60 @@ post '/feed' do
 
       redirect '/feed'
     end
+  else
+    redirect '/'
 
   end
 end
 
 
-delete '/profile/:id' do
-    User.destroy(params[:id])
-    # redirect '/profile/delete-confirmed'
-    # session.clear
-    #use a two step process
+# delete '/profile/:id' do
+#     # @user = User.find_by(params[:id])
+#     # @user.active = false
+#     redirect '/profile/deactivate'
+#     # session.clear
+#     #use a two step process
+#
+# end
+
+get '/profile/deactivate' do
+  if session[:user_id] && session[:active] == true
+  erb :deactivate
+  end
+end
+
+post '/profile/deactivate' do
+    User.find_by(id: session[:user_id], password: params[:password]).active = false
+    redirect '/deactivate-confirmed'
 
 end
 
-# get '/profile/delete-confirmed' do
-#   redirect '/' unless session['user_id'] != nil
-#   erb :delete_confirmed
-# end
+get '/deactivate-confirmed' do
+  erb :deactivate_confirmed
+end
+
+get '/deactivated' do
+  erb :deactivated
+end
+
+post '/deactivated' do
+  if params[:reactivate['yes']]
+    redirect '/reactivate'
+  elsif params[:reactivate['no']]
+    redirect '/'
+  end
+
+end
+
+get '/reactivate' do
+
+  erb :reactivate
+end
+
+post '/porfile/reactivate' do
+  @user = User.find_by(email: params['reactivate-email'],password: params['reactivate-pass'])
+  @user.active = true
+  session[:user_id] = @user.id
+  session[:active] = @user.active
+  redirect "/profile/#{@user.id}"
+end

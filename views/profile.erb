@@ -3,40 +3,51 @@
 <head>
   <meta charset="utf-8">
   <title></title>
-  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="profile.css">
   </head>
   <body>
 
 <!-- nav bar -->
     <%= yield %>
 
+    <div class="postBox">
     <h1>This is <%= @user.first_name %><% if @user.first_name[-1] =='s'%>'<%else%>'s<%end%> profile</h1>
     <h3><%= @user.email %></h3>
     <h3><%= @user.birthday %></h3>
+    <h3> Posts: <%=@user.posts.count%></h3>
+  </div>
 
 
 
 <!-- ============================================== -->
-    <h3> Posts: <%=@user.posts.count%></h3>
+
     <% @user.posts.order(created_at: :desc).limit(20).each do |p| %>
     <div class="posts">
       <a href = "/profile/<%=@user.id%>"><h3><%=@user.first_name%> <%= @user.last_name%></h3></a>
       <p><%=p.content %></p>
       <p><%=p.created_at%></p>
-    </div>
+      <br>
 
     <% end %>
+  </div>
 
-    <% if session['user_id'] == @user.id %>
-    <form class="" action="/profile/<%= @user.id %>" method="post">
-      <input type="hidden" name="_method" value="delete"/>
-
-      <input id = "deleteBtn" type="submit" name="deleteBtn" value = "Delete Account"/>
-    </form>
+    <% if session[:user_id] == @user.id && session[:active] == @user.active %>
+    <a href="/profile/deactivate">Deactivate Account</a>
     <% else %>
     <form></form>
     <% end %>
+    <style media="screen">
+      body {
+        margin: 0 auto;
+        font-family: 'Varela Round', sans-serif;
+        /* font-family: 'Butler'; */
+        text-align: center;
+      }
+      .postBox{
+        margin-bottom: 5%;
+      }
 
+    </style>
 
 
 </body>
