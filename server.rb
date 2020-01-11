@@ -60,6 +60,7 @@ post '/login' do
     redirect "/profile/#{@user.id}"
 
   elsif @user.active == false
+    session[:active] = false
     redirect '/deactivated'
   else
     redirect '/'
@@ -147,27 +148,27 @@ post '/feed' do
 end
 
 
-# delete '/profile/:id' do
-#     # @user = User.find_by(params[:id])
-#     # @user.active = false
-#     redirect '/profile/deactivate'
-#     # session.clear
-#     #use a two step process
+delete '/profile/:id' do
+    @user = User.find_by(id: params[:id], active: session[:active])
+    @user.update(active: false)
+    session.clear
+    redirect '/deactivate-confirmed'
+    #use a two step process
+
+end
+#
+# get '/profile/deactivate-user' do
+#   if session[:user_id] && session[:active] == true
+#   erb :deactivate
+#   end
+# end
+#
+# post '/profile/deactivate' do
+#     User.find_by(id: session[:user_id], password: params[:password]).active = false
+#     redirect '/deactivate-confirmed'
 #
 # end
-
-get '/profile/deactivate' do
-  if session[:user_id] && session[:active] == true
-  erb :deactivate
-  end
-end
-
-post '/profile/deactivate' do
-    User.find_by(id: session[:user_id], password: params[:password]).active = false
-    redirect '/deactivate-confirmed'
-
-end
-
+#
 get '/deactivate-confirmed' do
   erb :deactivate_confirmed
 end
@@ -177,23 +178,32 @@ get '/deactivated' do
 end
 
 post '/deactivated' do
-  if params[:reactivate['yes']]
+  if params[:reactivate]['yes']
     redirect '/reactivate'
-  elsif params[:reactivate['no']]
+  elsif params[:reactivate]['no']
     redirect '/'
   end
 
 end
 
 get '/reactivate' do
+  if session[:active] != false
+    redirect '/'
+  else
+    erb :reactivate
 
-  erb :reactivate
+  end
 end
 
-post '/porfile/reactivate' do
-  @user = User.find_by(email: params['reactivate-email'],password: params['reactivate-pass'])
-  @user.active = true
+post '/reactivate' do
+  @user = User.find_by(email: params['email'],password: params['password'])
+  pp @user
+  if @user.active != false
+    redirect '/'
+  else
+  @user.update(active: true)
   session[:user_id] = @user.id
   session[:active] = @user.active
   redirect "/profile/#{@user.id}"
+  end
 end

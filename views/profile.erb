@@ -23,7 +23,7 @@
 
     <% @user.posts.order(created_at: :desc).limit(20).each do |p| %>
     <div class="posts">
-      <a href = "/profile/<%=@user.id%>"><h3><%=@user.first_name%> <%= @user.last_name%></h3></a>
+      <a href = "/profile/deactivate-user<%=@user.id%>"><h3><%=@user.first_name%> <%= @user.last_name%></h3></a>
       <p><%=p.content %></p>
       <p><%=p.created_at%></p>
       <br>
@@ -32,9 +32,13 @@
   </div>
 
     <% if session[:user_id] == @user.id && session[:active] == @user.active %>
-    <a href="/profile/deactivate">Deactivate Account</a>
+    <form class="" action="/profile/<%= @user.id %>" method="post">
+        <input type="hidden" name="_method" value="delete"/>
+
+        <input id = "deleteBtn" type="submit" name="deleteBtn" value = "Deactivate Account"/>
+      </form>
     <% else %>
-    <form></form>
+    <!-- <form></form> -->
     <% end %>
     <style media="screen">
       body {
@@ -45,6 +49,15 @@
       }
       .postBox{
         margin-bottom: 5%;
+      }
+
+      #deactivate-link{
+        background-color: #fff;
+        color: #ff0000;
+        padding:1%;
+        border: 2px solid #ff0000;
+        border-radius: 23px;
+        text-decoration:none;
       }
 
     </style>
