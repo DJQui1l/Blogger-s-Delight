@@ -33,6 +33,7 @@ post '/' do #CREATE new user to go be INSERTed to database
 
   @user.save
   session[:user_id] = @user.id
+  session[:active] = @user.active
   pp session[:user_id]
   redirect "/profile/#{@user.id}"
 
