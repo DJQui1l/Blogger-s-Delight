@@ -111,6 +111,15 @@ get "/profile/:id" do
     erb :start
 end
 
+post '/profile/:id' do
+  @usersPost = User.find_by(id: session[:user_id])
+    pp @userPost
+  @usersPost.posts.find_by(id: params[:p.id])
+    pp @userPost
+  @usersPost.update(content: params[:editable])
+  redirect '/profile/:id'
+end
+
 
 
 #

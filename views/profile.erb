@@ -10,7 +10,7 @@
 <!-- nav bar -->
     <%= yield %>
 
-    <div class="postBox">
+    <div class="user-info">
     <h1>This is <%= @user.first_name %><% if @user.first_name[-1] =='s'%>'<%else%>'s<%end%> profile</h1>
     <h3><%= @user.email %></h3>
     <h3><%= @user.birthday %></h3>
@@ -24,8 +24,12 @@
     <% @user.posts.order(created_at: :desc).limit(20).each do |p| %>
     <div class="posts">
       <a href = "/profile/deactivate-user<%=@user.id%>"><h3><%=@user.first_name%> <%= @user.last_name%></h3></a>
-      <p><%=p.content %></p>
-      <p><%=p.created_at%></p>
+      <form id="editForm" action="/profile/<%= @user.id %>" method="post">
+
+        <input disabled id ="post-content-<%= p.id %>"  name = 'post-<%= p.id %>' value = "<%=p.content %>"></input>
+      </form>
+      <p id = "post-time"><%=p.created_at%></p>
+      <button id ="editPosts">Edit </button>
       <br>
 
     <% end %>
@@ -47,7 +51,7 @@
         /* font-family: 'Butler'; */
         text-align: center;
       }
-      .postBox{
+      .user-info{
         margin-bottom: 5%;
       }
 
@@ -59,9 +63,83 @@
         border-radius: 23px;
         text-decoration:none;
       }
+      #editPosts{
+        color: blue;
+        cursor: pointer;
+
+      }
+       #post-content[disable = "disabled"]{
+         background-color: white;
+       }
+
+
 
     </style>
 
+<script >
+  editBtn = document.getElementById('editPosts');
 
+  postContent = document.getElementById('post-content-57')
+
+  postsdisabled = true
+    editBtn.addEventListener('click', function(){
+    // console.log("made true");
+    switch (postsdisabled){
+      case true:
+      console.log("is editable");
+        postContent.disabled = false;
+          postsdisabled = false;
+          editForm = document.getElementById('editForm')
+          submitInput = document.createElement('input')
+            submitInput.setAttribute('type','submit')
+          cancelInput = document.createElement('button')
+            cancelInput.setAttribute('type','button')
+            cancelInput.innerText ="Cancel"
+
+          editForm.appendChild(submitInput)
+          editForm.appendChild(cancelInput)
+
+          editBtn.style.visibility = 'hidden'
+
+          cancelInput.addEventListener('click', function(){
+            console.log('is not editable');
+            editBtn.style.visibility = 'visible'
+            postContent.disabled = true;
+            postsdisabled = true;
+
+            submitInput.remove()
+            cancelInput.remove()
+              })
+
+
+
+          break
+        case false:
+        postContent.disabled = true;
+        postsdisabled = true;
+        console.log("is not editable");
+
+        submitInput.remove()
+        cancelInput.remove()
+
+        break
+
+
+
+    // editForm = document.createElement('form')
+      // editInput = document.createElement('input')
+        // editInput.setAttribute('id','editValue')
+      // submitInput = document.createElement('input')
+        // submitInput.setAttribute('type','submit')
+      // editInput.value = postContent.value
+    }
+
+
+    })
+
+
+
+
+</script>
 </body>
 </html>
