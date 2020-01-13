@@ -92,10 +92,10 @@ get "/profile/:id" do
     if params[:id] == session[:user_id]
       @user = User.find_by(id: session[:user_id])
 
-    else #else load other user's profile and feed
-      if @user = User.find_by(id: params[:id]) == nil
+    elsif @user = User.find_by(id: params[:id]) == nil
         redirect '/feed'
       else
+        #else load other user's profile and feed
         @user = User.find_by(id: params[:id])
 
       end
