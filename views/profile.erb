@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title></title>
-  <link rel="stylesheet" href="profile.css">
+  <link rel="stylesheet" href="/profile.css">
   </head>
   <body>
 
@@ -23,10 +23,11 @@
 
     <% @user.posts.order(created_at: :desc).limit(20).each do |p| %>
     <div class="posts">
-      <a href = "/profile/deactivate-user<%=@user.id%>"><h3><%=@user.first_name%> <%= @user.last_name%></h3></a>
-      <form id="editForm" action="/profile/<%= @user.id %>" method="post">
+      <a href = "/profile/<%=@user.id%>"><h3><%=@user.first_name%> <%= @user.last_name%></h3></a>
 
-        <input disabled id ="post-content-<%= p.id %>"  name = 'post-<%= p.id %>' value = "<%=p.content %>"></input>
+      <form id="editForm" action="/profile/<%= @user.id %>" method="post">
+        <p id ="post-content-<%= p.id %>"> <%= p.content %></p>
+        <%session["posts-#{p.id}"] = p.id %>
       </form>
       <p id = "post-time"><%=p.created_at%></p>
       <button id ="editPosts">Edit </button>
@@ -45,100 +46,10 @@
     <!-- <form></form> -->
     <% end %>
     <style media="screen">
-      body {
-        margin: 0 auto;
-        font-family: 'Varela Round', sans-serif;
-        /* font-family: 'Butler'; */
-        text-align: center;
-      }
-      .user-info{
-        margin-bottom: 5%;
-      }
-
-      #deactivate-link{
-        background-color: #fff;
-        color: #ff0000;
-        padding:1%;
-        border: 2px solid #ff0000;
-        border-radius: 23px;
-        text-decoration:none;
-      }
-      #editPosts{
-        color: blue;
-        cursor: pointer;
-
-      }
-       #post-content[disable = "disabled"]{
-         background-color: white;
-       }
-
-
 
     </style>
 
-<script >
-  editBtn = document.getElementById('editPosts');
-
-  postContent = document.getElementById('post-content-57')
-
-  postsdisabled = true
-    editBtn.addEventListener('click', function(){
-    // console.log("made true");
-    switch (postsdisabled){
-      case true:
-      console.log("is editable");
-        postContent.disabled = false;
-          postsdisabled = false;
-          editForm = document.getElementById('editForm')
-          submitInput = document.createElement('input')
-            submitInput.setAttribute('type','submit')
-          cancelInput = document.createElement('button')
-            cancelInput.setAttribute('type','button')
-            cancelInput.innerText ="Cancel"
-
-          editForm.appendChild(submitInput)
-          editForm.appendChild(cancelInput)
-
-          editBtn.style.visibility = 'hidden'
-
-          cancelInput.addEventListener('click', function(){
-            console.log('is not editable');
-            editBtn.style.visibility = 'visible'
-            postContent.disabled = true;
-            postsdisabled = true;
-
-            submitInput.remove()
-            cancelInput.remove()
-              })
-
-
-
-          break
-        case false:
-        postContent.disabled = true;
-        postsdisabled = true;
-        console.log("is not editable");
-
-        submitInput.remove()
-        cancelInput.remove()
-
-        break
-
-
-
-    // editForm = document.createElement('form')
-      // editInput = document.createElement('input')
-        // editInput.setAttribute('id','editValue')
-      // submitInput = document.createElement('input')
-        // submitInput.setAttribute('type','submit')
-      // editInput.value = postContent.value
-    }
-
-
-    })
-
-
-
+<script src = "/main.js">
 
 </script>
 </body>

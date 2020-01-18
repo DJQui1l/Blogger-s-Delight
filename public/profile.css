@@ -2,3 +2,30 @@
   font-family: 'Butler';
   src: url('C:\Users\icebr\Documents\YearUp\NYCDA\Projects\Bloggers_Delight\public\Butler_and_ButlerStencil\Butler_Webfont\Butler.woff')
 }
+
+body {
+  margin: 0 auto;
+  font-family: 'Varela Round', sans-serif;
+  /* font-family: 'Butler'; */
+  text-align: center;
+}
+.user-info{
+  margin-bottom: 5%;
+}
+
+#deactivate-link{
+  background-color: #fff;
+  color: #ff0000;
+  padding:1%;
+  border: 2px solid #ff0000;
+  border-radius: 23px;
+  text-decoration:none;
+}
+#editPosts{
+  color: blue;
+  cursor: pointer;
+
+}
+ #post-content[disable = "disabled"]{
+   background-color: white;
+ }
